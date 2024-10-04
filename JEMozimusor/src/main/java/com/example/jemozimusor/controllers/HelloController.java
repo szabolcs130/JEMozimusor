@@ -29,6 +29,13 @@ public class HelloController {
         tcMoziNev.setCellValueFactory(new PropertyValueFactory<>("oszlopMoziNev"));
         tcIrSzam.setCellValueFactory(new PropertyValueFactory<>("oszlopIrSzam"));
         tcCim.setCellValueFactory(new PropertyValueFactory<>("oszlopcim"));
+        tcTelefon.setCellValueFactory(new PropertyValueFactory<>("oszloptelefon"));
+        tcFilmCim.setCellValueFactory(new PropertyValueFactory<>("oszlopFilmCim"));
+        tcSzines.setCellValueFactory(new PropertyValueFactory<>("oszlopSzines"));
+        tcSzinkron.setCellValueFactory(new PropertyValueFactory<>("oszlopSzinkron"));
+        tcSzarmazas.setCellValueFactory(new PropertyValueFactory<>("oszlopSzarmazas"));
+        tcMufaj.setCellValueFactory(new PropertyValueFactory<>("oszlopMufaj"));
+        tcHossz.setCellValueFactory(new PropertyValueFactory<>("oszlopHossz"));
     }
 
     @FXML
