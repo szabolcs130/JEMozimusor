@@ -55,30 +55,32 @@
             <children>
                <Label text="Mozi modosit" />
                <ComboBox fx:id="cbModositMozi" onAction="#cbAMoziKivalasz" prefWidth="150.0" promptText="Mozi neve" />
-               <HBox prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                     <Label text="Mozinev" />
-                     <TextField fx:id="tfMoziNeve" />
-                  </children>
-               </HBox>
-               <HBox prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                     <Label text="Irszam" />
-                     <TextField fx:id="tfIrSzam" />
-                  </children>
-               </HBox>
-               <HBox prefHeight="100.0" prefWidth="200.0">
-                  <children>
-                     <Label text="Cim" />
-                     <TextField fx:id="tfCim" />
-                  </children>
-               </HBox>
-               <HBox prefHeight="100.0" prefWidth="200.0">
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                   <children>
                      <Label text="Telefon" />
                      <TextField fx:id="tfTelefon" />
                   </children>
                </HBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Mozinev" />
+                     <TextField fx:id="tfMoziNeve" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Irszam" />
+                     <TextField fx:id="tfIrSzam" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Cim" />
+                     <TextField fx:id="tfCim" />
+                  </children>
+               </HBox>
+               <Button fx:id="btModositMozi" mnemonicParsing="false" onAction="#btAModositMozi" text="Modosit" />
+               <TextField fx:id="tfMoziAzon" disable="true" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" />
             </children>
          </VBox>
       </center>

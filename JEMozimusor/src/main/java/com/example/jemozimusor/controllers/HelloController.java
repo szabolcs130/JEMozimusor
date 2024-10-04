@@ -42,6 +42,7 @@ public class HelloController {
     public TextField tfIrSzam;
     public TextField tfCim;
     public TextField tfTelefon;
+    public TextField tfMoziAzon;
 
     public void initialize(){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -72,16 +73,32 @@ public class HelloController {
         }
     }
     public void cbAMoziKivalasz(ActionEvent event){
-        if (cbModositMozi.getSelectionModel().getSelectedItem().toString()!="Mozi neve"){
-            for (Mozi m:MoziDAO.getMozi()
-            ) {
-                if (m.getOszlopMoziNev().equals(cbModositMozi.getSelectionModel().getSelectedItem().toString())){
-                    tfMoziNeve.setText(m.getOszlopMoziNev());
-                    tfIrSzam.setText(""+m.getOszlopIrSzam());
-                    tfCim.setText(m.getOszlopcim());
-                    tfTelefon.setText(m.getOszloptelefon());
-                }
-            }
+       if (cbModositMozi.getSelectionModel().getSelectedItem()!=null){
+           if (cbModositMozi.getSelectionModel().getSelectedItem().toString()!="Mozi neve"){
+               for (Mozi m:MoziDAO.getMozi()
+               ) {
+                   if (m.getOszlopMoziNev().equals(cbModositMozi.getSelectionModel().getSelectedItem().toString())){
+                       tfMoziNeve.setText(m.getOszlopMoziNev());
+                       tfIrSzam.setText(""+m.getOszlopIrSzam());
+                       tfCim.setText(m.getOszlopcim());
+                       tfTelefon.setText(m.getOszloptelefon());
+                       tfMoziAzon.setText(""+m.getOszlopMoziAzon());
+                   }
+               }
+           }
+       }
+    }
+    public void btAModositMozi(ActionEvent event){
+        MoziDAO alma=new MoziDAO();
+          alma.modositMozi(new Mozi(Integer.parseInt(tfMoziAzon.getText()),tfMoziNeve.getText(),Integer.parseInt(tfIrSzam.getText()), tfCim.getText(),tfTelefon.getText()));
+
+       cbModositMozi.getItems().clear();
+       cbModositMozi.setPromptText("Mozi neve");
+        for (Mozi m:MoziDAO.getMozi()
+        ) {
+            cbModositMozi.getItems().add(m.getOszlopMoziNev());
         }
+
+
     }
 }

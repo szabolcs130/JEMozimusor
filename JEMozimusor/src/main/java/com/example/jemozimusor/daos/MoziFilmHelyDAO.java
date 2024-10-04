@@ -71,7 +71,7 @@ public class MoziFilmHelyDAO {
         }catch (SQLException e){
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
-                    LocalDateTime.now() + ": Could not load Persons from database ");
+                    LocalDateTime.now() + ": MoziFilmHely adatai nem kerult betoltesre az adatbazisbol ");
             moziFilmHely.clear();
         }
     }
