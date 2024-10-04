@@ -75,5 +75,37 @@ public class MoziFilmHelyDAO {
             moziFilmHely.clear();
         }
     }
+    private static void getMoziNev() {
+        try {
+            Connection connection=Database.connect();
+
+            String query="SELECT * FROM "+tablaNevMozi;
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            moziFilmHely.clear();
+            while (rs.next()) {
+                moziFilmHely.add(new MoziFilmHely(
+                        rs.getInt(oszlopMoziAzon),
+                        rs.getString(oszlopMoziNev),
+                        rs.getInt(oszlopIrSzam),
+                        rs.getString(oszlopcim),
+                        rs.getString(oszloptelefon),
+                        rs.getInt(oszlopFKod),
+                        rs.getString(oszlopFilmCim),
+                        rs.getInt(oszlopSzines),
+                        rs.getString(oszlopSzinkron),
+                        rs.getString(oszlopSzarmazas),
+                        rs.getString(oszlopMufaj),
+                        rs.getInt(oszlopHossz),
+                        rs.getInt(oszlopHelyFKod),
+                        rs.getInt(oszlopHelyMoziAzon)));
+            }
+        }catch (SQLException e){
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Could not load Persons from database ");
+            moziFilmHely.clear();
+        }
+    }
 
 }

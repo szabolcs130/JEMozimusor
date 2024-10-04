@@ -2,29 +2,94 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jemozimusor.controllers.HelloController">
+<VBox fx:id="vbKontener" alignment="CENTER" minHeight="1000.0" minWidth="1000.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jemozimusor.controllers.HelloController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
-
-
-  <Button onAction="#onHelloButtonClick" text="Hello" />
-   <TableView fx:id="moziFilmHelyTabla" prefHeight="1200.0" prefWidth="1200.0">
-     <columns>
-       <TableColumn fx:id="tcMoziNev" prefWidth="75.0" text="Mozinev" />
-       <TableColumn fx:id="tcIrSzam" prefWidth="75.0" text="Irszam" />
-         <TableColumn fx:id="tcCim" prefWidth="75.0" text="Cim" />
-         <TableColumn fx:id="tcTelefon" prefWidth="75.0" text="Telefon" />
-         <TableColumn fx:id="tcFilmCim" prefWidth="75.0" text="Filmcim" />
-         <TableColumn fx:id="tcSzines" prefWidth="75.0" text="Szines" />
-         <TableColumn fx:id="tcSzinkron" prefWidth="75.0" text="Szinkron" />
-         <TableColumn fx:id="tcSzarmazas" prefWidth="82.0" text="Szarmazas" />
-         <TableColumn fx:id="tcMufaj" prefWidth="68.0" text="Mufaj" />
-         <TableColumn fx:id="tcHossz" prefWidth="75.0" text="Hossz" />
-     </columns>
-   </TableView>
+   <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <left>
+         <VBox fx:id="vbMoziFilmHely" alignment="CENTER" prefHeight="1200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+               <TableView fx:id="moziFilmHelyTabla" prefHeight="600.0" prefWidth="600.0">
+                 <columns>
+                   <TableColumn fx:id="tcMoziNev" prefWidth="75.0" text="Mozinev" />
+                   <TableColumn fx:id="tcIrSzam" prefWidth="75.0" text="Irszam" />
+                     <TableColumn fx:id="tcCim" prefWidth="75.0" text="Cim" />
+                     <TableColumn fx:id="tcTelefon" prefWidth="75.0" text="Telefon" />
+                     <TableColumn fx:id="tcFilmCim" prefWidth="75.0" text="Filmcim" />
+                     <TableColumn fx:id="tcSzines" prefWidth="75.0" text="Szines" />
+                     <TableColumn fx:id="tcSzinkron" prefWidth="75.0" text="Szinkron" />
+                     <TableColumn fx:id="tcSzarmazas" prefWidth="82.0" text="Szarmazas" />
+                     <TableColumn fx:id="tcMufaj" prefWidth="68.0" text="Mufaj" />
+                     <TableColumn fx:id="tcHossz" prefWidth="75.0" text="Hossz" />
+                 </columns>
+               </TableView>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                  <children>
+                     <Button fx:id="btUjMozi" onAction="#onHelloButtonClick" text="Uj">
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                     </Button>
+                     <Button fx:id="btSzerkesztMozi" onAction="#onHelloButtonClick" text="Szerkeszt" />
+                     <Button fx:id="btTorolMozi" onAction="#onHelloButtonClick" text="Torol" />
+                  </children>
+                  <opaqueInsets>
+                     <Insets />
+                  </opaqueInsets>
+               </HBox>
+            </children>
+         </VBox>
+      </left>
+      <center>
+         <VBox fx:id="vbKeresMozi" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+               <Label text="Mozi modosit" />
+               <ComboBox fx:id="cbModositMozi" onAction="#cbAMoziKivalasz" prefWidth="150.0" promptText="Mozi neve" />
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Mozinev" />
+                     <TextField fx:id="tfMoziNeve" />
+                  </children>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Irszam" />
+                     <TextField fx:id="tfIrSzam" />
+                  </children>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Cim" />
+                     <TextField fx:id="tfCim" />
+                  </children>
+               </HBox>
+               <HBox prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <Label text="Telefon" />
+                     <TextField fx:id="tfTelefon" />
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </center>
+      <top>
+         <VBox fx:id="vbMenusor" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+            
+                                    
+              <Button fx:id="btMoziKeres" onAction="#onHelloButtonClick" text="Mozi kereso" />
+            </children>
+         </VBox>
+      </top>
+   </BorderPane>
 </VBox>
