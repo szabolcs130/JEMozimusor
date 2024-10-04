@@ -68,10 +68,6 @@ public class MoziFilmHelyDAO {
                         rs.getInt(oszlopHelyFKod),
                         rs.getInt(oszlopHelyMoziAzon)));
             }
-            for (MoziFilmHely m:moziFilmHely
-                 ) {
-                System.out.println(m);
-            }
         }catch (SQLException e){
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
