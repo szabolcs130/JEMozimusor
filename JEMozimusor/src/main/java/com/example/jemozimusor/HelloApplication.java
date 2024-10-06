@@ -26,7 +26,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
 
-        MoziFilmHelyDAO.keresMoziFilmHely("Toldi","Anyátlanok","fel",-1);
+       // MoziFilmHelyDAO.keresMoziFilmHely("Toldi","Anyátlanok","fel",-1);
       /*  for (MoziFilmHely m: MoziFilmHelyDAO.getKeresMoziFilmHely()
              ) {
             System.out.println(m);

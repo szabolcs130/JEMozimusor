@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MoziDAO {
+public class MoziDAO extends MoziFilmHelyDAO{
     private static final String tablaNevMozi="mozi";
     private static final String oszlopMoziAzon="moziazon";
     private static final String oszlopMoziNev="mozinev";
@@ -94,6 +94,7 @@ public class MoziDAO {
            },()->{
                throw new IllegalStateException("Mozi adatait nem sikerult modositani a felhasznalo nezetben");
            });
+           MoziFilmHelyDAO.feltoltMoziFilmHely();
 
            statement.close();
            connection.close();
@@ -123,6 +124,7 @@ public class MoziDAO {
             if (db<1) {
                 System.out.println("Nem sikerult torolni a mozit.");
             }
+            MoziFilmHelyDAO.feltoltMoziFilmHely();
 
             statement.close();
             connection.close();
@@ -154,6 +156,8 @@ public class MoziDAO {
                         Level.INFO,
                         LocalDateTime.now() + ": Mozi adatait nem sikerult beilleszteni az adatbázisban..");
             }
+            MoziFilmHelyDAO.feltoltMoziFilmHely();
+
             statement.close();
             connection.close();
 

@@ -51,7 +51,7 @@ public class MoziFilmHelyDAO {
     public static ObservableList<MoziFilmHely> getMoziFilmHely(){
         return FXCollections.unmodifiableObservableList(moziFilmHely);
     }
-    private static void feltoltMoziFilmHely() {
+    protected static void feltoltMoziFilmHely() {
         try {
             Connection connection=Database.connect();
 
@@ -117,21 +117,60 @@ public class MoziFilmHelyDAO {
         }
     }
     public static ObservableList<MoziFilmHely> keresMoziFilmHely(String moziNev,String FilmCim,String szinkron,int szines){
-       // keresMoziFilmHely.clear();
+       keresMoziFilmHely.clear();
         for (MoziFilmHely m: moziFilmHely
              ) {
-            if ((!(moziNev.isEmpty()) && m.getOszlopMoziNev().equals(moziNev))
-                    && (!(FilmCim.isEmpty()) && m.getOszlopFilmCim().equals(FilmCim))
-            &&(!(szinkron.isEmpty()) && m.getOszlopSzinkron().equals(szinkron))
-            && (m.getOszlopSzines()==szines)){
+            if ((!(moziNev.equals("ures")) && m.getOszlopMoziNev().equals(moziNev))
+            ||(!(FilmCim.equals("ures")) && m.getOszlopFilmCim().equals(FilmCim))
+            ||(!(szinkron.equals("ures")) && m.getOszlopSzinkron().equals(szinkron))
+            || (szines!=-2 && m.getOszlopSzines()==szines)){
 
                 keresMoziFilmHely.add(new MoziFilmHely(m.getOszlopMoziAzon(),m.getOszlopMoziNev(),m.getOszlopIrSzam(),m.getOszlopcim(),m.getOszloptelefon(),
                         m.getOszlopFKod(),m.getOszlopFilmCim(),m.getOszlopSzines(),m.getOszlopSzinkron(),m.getOszlopSzarmazas(),
                         m.getOszlopMufaj(),m.getOszlopHossz(),m.getOszlopHelyFKod(),m.getOszlopHelyMoziAzon()));
-                System.out.println(m);
-            }
+               // System.out.println(m);
+           }
         }
         return keresMoziFilmHely;
     }
+public static ObservableList<MoziFilmHely> alma(String sql){
+    keresMoziFilmHely.clear();
 
+        try{
+    Connection connection=Database.connect();
+String sql2="SELECT * FROM "+tablaNevMozi +" inner join "+tablaNevhely+" on  "+tablaNevMozi+"."+oszlopMoziAzon+"="+
+        tablaNevhely+"."+oszlopHelyMoziAzon+" inner join "+tablaNevFilm+" on "+tablaNevhely+"."+oszlopHelyFKod+"="+tablaNevFilm+"."+oszlopFKod+" "+sql;
+
+            System.out.println(sql2);
+            PreparedStatement statement = connection.prepareStatement(sql2);
+    ResultSet rs = statement.executeQuery();
+    keresMoziFilmHely.clear();
+    while (rs.next()) {
+        keresMoziFilmHely.add(new MoziFilmHely(
+                rs.getInt(oszlopMoziAzon),
+                rs.getString(oszlopMoziNev),
+                rs.getInt(oszlopIrSzam),
+                rs.getString(oszlopcim),
+                rs.getString(oszloptelefon),
+                rs.getInt(oszlopFKod),
+                rs.getString(oszlopFilmCim),
+                rs.getInt(oszlopSzines),
+                rs.getString(oszlopSzinkron),
+                rs.getString(oszlopSzarmazas),
+                rs.getString(oszlopMufaj),
+                rs.getInt(oszlopHossz),
+                rs.getInt(oszlopHelyFKod),
+                rs.getInt(oszlopHelyMoziAzon)));
+    }
+
+
+}catch (SQLException e){
+        Logger.getAnonymousLogger().log(
+                Level.SEVERE,
+                LocalDateTime.now() + ": Nem siekrult a kereso szerint eljarni ");
+        keresMoziFilmHely.clear();
+    }
+    return keresMoziFilmHely;
+
+}
 }

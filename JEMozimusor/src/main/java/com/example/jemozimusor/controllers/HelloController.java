@@ -137,6 +137,7 @@ public class HelloController {
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
         vbKontener.getChildren().add(hbMenusor);
         vbKontener.getChildren().add(moziFilmHelyTabla);
+
         moziFilmHelyTabla.setItems(MoziFilmHelyDAO.getMoziFilmHely());
 
         tcMoziNev.setCellValueFactory(new PropertyValueFactory<>("oszlopMoziNev"));
@@ -230,39 +231,68 @@ public class HelloController {
     }
 
     public void btAMozikKeresoKeres(ActionEvent event) {
+        String lekerdez="Where ";
 
-        String szinkron="fel";
-        if (rbMozikKeresoSzinkron.isSelected()){
-            szinkron="fel";
-        }else{
-            szinkron="mb";
+      //cb SZINES
+        int szines1 = -1;
+        if (rbMozikKeresoSzinkron.isSelected()) {
+            szines1 = 0;
+
         }
-        int szines=0;
-        if (rbMozikKeresoSzinkron.isSelected()){
-            szines=0;
+        lekerdez+="szines="+szines1;
+
+//radiogombok
+        String szinkron1 = "";
+        if (rbMozikKeresoFelirat.isSelected() && rbMozikKeresoFeliratMb.isSelected()){
+            lekerdez+=" and szinkron='fel'";
+
         }else{
-            szines=1;
+            if (rbMozikKeresoFelirat.isSelected()) {
+                szinkron1 = "fel";
+                lekerdez+=" and szinkron='fel'";
+            }
+            if (rbMozikKeresoFeliratMb.isSelected()) {
+                szinkron1 = "mb";
+                lekerdez+=" and szinkron='mb'";
+
+            }
         }
+
+
+
       //  System.out.println(szinkron+" "+szines);
       //  System.out.println("alma"+rbMozikKeresoSzinkron.isSelected());
        /* System.out.println("alma"+rbMozikKeresoFeliratMb.isSelected());
         System.out.println("alma"+rbMozikKeresoFelirat.isSelected());*/
-        String moziNev="";
+        String moziNev1="";
         if (cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem()!=null){
-            moziNev=cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem().toString();
+            moziNev1=cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem().toString();
+            lekerdez+=" and mozinev='"+moziNev1+"'";
+
            // System.out.println("alma"+cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem().toString());
+        }else{
+            moziNev1="ures";
         }
-        String Filmcim="";
+        String Filmcim1="";
         if (!tfMozikKeresoFilmCim.getText().isEmpty()){
-            Filmcim=tfMozikKeresoFilmCim.getText();
+
+            Filmcim1=tfMozikKeresoFilmCim.getText();
+            lekerdez+=" and filmcim='"+Filmcim1+"'";
            // System.out.println("alma"+tfMozikKeresoFilmCim.getText());
+        }else{
+            Filmcim1="ures";
         }
-        MoziFilmHelyDAO.keresMoziFilmHely(moziNev,Filmcim,szinkron,szines);
+       // MoziFilmHelyDAO.keresMoziFilmHely(moziNev1,Filmcim1,szinkron1,szines1);
         if (!vbKontener.getChildren().contains(moziFilmHelyTabla)) {
             vbKontener.getChildren().add(moziFilmHelyTabla);
         }
-        System.out.println(moziNev+" "+Filmcim+" "+szinkron+" "+szines);
-        moziFilmHelyTabla.setItems(MoziFilmHelyDAO.keresMoziFilmHely(moziNev,Filmcim,szinkron,szines));
+       // System.out.println(moziNev1+" "+Filmcim1+" "+szinkron1+" "+szines1);
+
+       // MoziFilmHelyDAO.keresMoziFilmHely(moziNev1,Filmcim1,szinkron1,szines1);
+
+       // moziFilmHelyTabla.setItems(MoziFilmHelyDAO.keresMoziFilmHely(moziNev1,Filmcim1,szinkron1,szines1));
+        System.out.println(lekerdez);
+        moziFilmHelyTabla.setItems(MoziFilmHelyDAO.alma(lekerdez));
 
         tcMoziNev.setCellValueFactory(new PropertyValueFactory<>("oszlopMoziNev"));
         tcIrSzam.setCellValueFactory(new PropertyValueFactory<>("oszlopIrSzam"));
