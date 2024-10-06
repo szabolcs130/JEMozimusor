@@ -85,6 +85,14 @@ public class MoziDAO {
 
            //!!! IDE KELL EGY OPTIONAL<MOZI>....
 
+           Optional<Mozi> optionalMozi=getMozi(ujMozi.getOszlopMoziAzon());
+           optionalMozi.ifPresentOrElse((regiMozi)-> {
+               mozi.remove(regiMozi);
+               mozi.add(ujMozi);
+           },()->{
+               throw new IllegalStateException("Mozi adatait nem sikerult modositani a felhasznalo nezetben");
+           });
+
            statement.close();
            connection.close();
 
@@ -93,5 +101,14 @@ public class MoziDAO {
                    Level.SEVERE,
                    LocalDateTime.now() + ": Mozi adatai nem kerult modositani az adatbazisban ");
        }
+    }
+    public static Optional<Mozi> getMozi(int id){
+        for (Mozi m: mozi){
+            if (m.getOszlopMoziAzon()==id)
+            {
+                return Optional.of(m);
+            }
+        }
+        return Optional.empty();
     }
 }

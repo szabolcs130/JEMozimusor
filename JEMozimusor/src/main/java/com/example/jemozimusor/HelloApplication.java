@@ -16,11 +16,6 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
-        //Figyelem! az update hiaba mukodik az adatbazison, ezt a felhasznalo nem latja egybol, igy kell
-        //egy OPTIONAL<MOZI> a hellocontrollerbe ahol atirjuk a dolgokat.
-
-
         //MoziDAO alma=new MoziDAO();
       //  alma.modositMozi(new Mozi("Bárka Kikötõ a Ráday utcában",1092,"Ráday utca","01"));
            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -28,7 +23,6 @@ public class HelloApplication extends Application {
            stage.setTitle("Hello!");
            stage.setScene(scene);
            stage.show();
-
     }
 
     public static void main(String[] args) {

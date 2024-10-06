@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -23,7 +24,6 @@ public class HelloController {
 
     public VBox vbKontener;
     public VBox vbKeresMozi;
-    public VBox vbMenusor;
     public TableView<MoziFilmHely> moziFilmHelyTabla;
     public TableColumn<MoziFilmHely,String> tcMoziNev;
     public TableColumn<MoziFilmHely,Integer> tcIrSzam;
@@ -37,16 +37,21 @@ public class HelloController {
     public TableColumn<MoziFilmHely,Integer> tcHossz;
     public VBox vbMoziFilmHely;
     public ComboBox cbModositMozi;
-    public Button btMoziKeres;
+    public Button btMoziModosit;
+    public Button btTorolMozi;
     public TextField tfMoziNeve;
     public TextField tfIrSzam;
     public TextField tfCim;
     public TextField tfTelefon;
     public TextField tfMoziAzon;
+    public HBox hbMenusor;
+    public Button btModositMozi;
+    public Button btIrMozi;
+    public Label lbMoziEsemeny;
 
     public void initialize(){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
-        vbKontener.getChildren().add(vbMenusor);
+        vbKontener.getChildren().add(hbMenusor);
         vbKontener.getChildren().add(moziFilmHelyTabla);
 
         moziFilmHelyTabla.setItems(MoziFilmHelyDAO.getMoziFilmHely());
@@ -66,7 +71,17 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick(ActionEvent event) throws IOException {
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+        vbKontener.getChildren().add(lbMoziEsemeny);
+        lbMoziEsemeny.setText("Mozi Modosit");
+        vbKontener.getChildren().add(cbModositMozi);
         vbKontener.getChildren().add(vbKeresMozi);
+        vbKeresMozi.getChildren().remove(btTorolMozi);
+        if (!vbKeresMozi.getChildren().contains(btModositMozi)) {
+            vbKeresMozi.getChildren().add(btModositMozi);
+        }
+        vbKeresMozi.getChildren().remove(btIrMozi);
+
         for (Mozi m:MoziDAO.getMozi()
              ) {
             cbModositMozi.getItems().add(m.getOszlopMoziNev());
@@ -74,7 +89,7 @@ public class HelloController {
     }
     public void cbAMoziKivalasz(ActionEvent event){
        if (cbModositMozi.getSelectionModel().getSelectedItem()!=null){
-           if (cbModositMozi.getSelectionModel().getSelectedItem().toString()!="Mozi neve"){
+
                for (Mozi m:MoziDAO.getMozi()
                ) {
                    if (m.getOszlopMoziNev().equals(cbModositMozi.getSelectionModel().getSelectedItem().toString())){
@@ -85,20 +100,63 @@ public class HelloController {
                        tfMoziAzon.setText(""+m.getOszlopMoziAzon());
                    }
                }
-           }
+
        }
     }
     public void btAModositMozi(ActionEvent event){
         MoziDAO alma=new MoziDAO();
-          alma.modositMozi(new Mozi(Integer.parseInt(tfMoziAzon.getText()),tfMoziNeve.getText(),Integer.parseInt(tfIrSzam.getText()), tfCim.getText(),tfTelefon.getText()));
+        if (cbModositMozi.getSelectionModel().getSelectedItem()!=null) {
 
-       cbModositMozi.getItems().clear();
-       cbModositMozi.setPromptText("Mozi neve");
+            alma.modositMozi(new Mozi(Integer.parseInt(tfMoziAzon.getText()), tfMoziNeve.getText(), Integer.parseInt(tfIrSzam.getText()), tfCim.getText(), tfTelefon.getText()));
+
+            cbModositMozi.getItems().clear();
+            cbModositMozi.setPromptText("Mozi neve");
+            for (Mozi m : MoziDAO.getMozi()
+            ) {
+                cbModositMozi.getItems().add(m.getOszlopMoziNev());
+            }
+        }
+
+    }
+    public void btAMoziOlvas(ActionEvent event){
+        vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+        vbKontener.getChildren().add(moziFilmHelyTabla);
+    }
+
+    public void btATorolMozi(ActionEvent event) {
+    }
+    public void btAMenuTorolMozi(ActionEvent event){
+        vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+        vbKontener.getChildren().add(lbMoziEsemeny);
+        lbMoziEsemeny.setText("Mozi Torol");
+        vbKontener.getChildren().add(cbModositMozi);
+        vbKontener.getChildren().add(vbKeresMozi);
+        vbKeresMozi.getChildren().remove(btModositMozi);
+        vbKeresMozi.getChildren().remove(btIrMozi);
+        if (!vbKeresMozi.getChildren().contains(btTorolMozi)) {
+            vbKeresMozi.getChildren().add(btTorolMozi);
+        }
         for (Mozi m:MoziDAO.getMozi()
         ) {
             cbModositMozi.getItems().add(m.getOszlopMoziNev());
         }
-
+    }
+    public void btAMenuIrMozi(ActionEvent event) {
+        vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+        vbKontener.getChildren().add(lbMoziEsemeny);
+        lbMoziEsemeny.setText("Mozi ir");
+        vbKontener.getChildren().add(vbKeresMozi);
+        vbKeresMozi.getChildren().remove(btTorolMozi);
+        vbKeresMozi.getChildren().remove(btModositMozi);
+        if (!vbKeresMozi.getChildren().contains(btIrMozi)) {
+            vbKeresMozi.getChildren().add(btIrMozi);
+        }
+        vbKeresMozi.getChildren().remove(cbModositMozi);
+    }
+    public void btAIrMozi(ActionEvent event) {
 
     }
 }
