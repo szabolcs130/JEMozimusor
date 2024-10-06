@@ -32,6 +32,15 @@ public class MoziFilmHelyDAO {
     private static final String oszlopHelyMoziAzon="moziazon";
 
 
+    public static final ObservableList<MoziFilmHely> keresMoziFilmHely;
+    static{
+        keresMoziFilmHely=FXCollections.observableArrayList();
+
+    }
+    public static ObservableList<MoziFilmHely> getKeresMoziFilmHely(){
+        return FXCollections.unmodifiableObservableList(keresMoziFilmHely);
+    }
+
     private static final ObservableList<MoziFilmHely> moziFilmHely;
     static{
         moziFilmHely=FXCollections.observableArrayList();
@@ -106,6 +115,23 @@ public class MoziFilmHelyDAO {
                     LocalDateTime.now() + ": Could not load Persons from database ");
             moziFilmHely.clear();
         }
+    }
+    public static ObservableList<MoziFilmHely> keresMoziFilmHely(String moziNev,String FilmCim,String szinkron,int szines){
+       // keresMoziFilmHely.clear();
+        for (MoziFilmHely m: moziFilmHely
+             ) {
+            if ((!(moziNev.isEmpty()) && m.getOszlopMoziNev().equals(moziNev))
+                    && (!(FilmCim.isEmpty()) && m.getOszlopFilmCim().equals(FilmCim))
+            &&(!(szinkron.isEmpty()) && m.getOszlopSzinkron().equals(szinkron))
+            && (m.getOszlopSzines()==szines)){
+
+                keresMoziFilmHely.add(new MoziFilmHely(m.getOszlopMoziAzon(),m.getOszlopMoziNev(),m.getOszlopIrSzam(),m.getOszlopcim(),m.getOszloptelefon(),
+                        m.getOszlopFKod(),m.getOszlopFilmCim(),m.getOszlopSzines(),m.getOszlopSzinkron(),m.getOszlopSzarmazas(),
+                        m.getOszlopMufaj(),m.getOszlopHossz(),m.getOszlopHelyFKod(),m.getOszlopHelyMoziAzon()));
+                System.out.println(m);
+            }
+        }
+        return keresMoziFilmHely;
     }
 
 }

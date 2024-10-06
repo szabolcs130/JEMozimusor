@@ -48,6 +48,14 @@ public class HelloController {
     public Button btModositMozi;
     public Button btIrMozi;
     public Label lbMoziEsemeny;
+    public CheckBox rbMozikKeresoSzinkron;
+    public RadioButton rbMozikKeresoFelirat;
+    public TextField tfMozikKeresoFilmCim;
+    public ComboBox cbMozikKeresoMoziNev;
+    public Button btMenuMoziKeres;
+    public HBox btMoziKeresoresz;
+    public RadioButton rbMozikKeresoFeliratMb;
+    public Button btMozikKeresoKeres;
 
     public void initialize(){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -86,6 +94,13 @@ public class HelloController {
              ) {
             cbModositMozi.getItems().add(m.getOszlopMoziNev());
         }
+        tfMoziAzon.setText("");
+        tfMoziNeve.setText("");
+        tfIrSzam.setText("");
+        tfCim.setText("");
+        tfTelefon.setText("");
+        cbModositMozi.getSelectionModel().clearSelection();
+
     }
     public void cbAMoziKivalasz(ActionEvent event){
        if (cbModositMozi.getSelectionModel().getSelectedItem()!=null){
@@ -122,9 +137,30 @@ public class HelloController {
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
         vbKontener.getChildren().add(hbMenusor);
         vbKontener.getChildren().add(moziFilmHelyTabla);
+        moziFilmHelyTabla.setItems(MoziFilmHelyDAO.getMoziFilmHely());
+
+        tcMoziNev.setCellValueFactory(new PropertyValueFactory<>("oszlopMoziNev"));
+        tcIrSzam.setCellValueFactory(new PropertyValueFactory<>("oszlopIrSzam"));
+        tcCim.setCellValueFactory(new PropertyValueFactory<>("oszlopcim"));
+        tcTelefon.setCellValueFactory(new PropertyValueFactory<>("oszloptelefon"));
+        tcFilmCim.setCellValueFactory(new PropertyValueFactory<>("oszlopFilmCim"));
+        tcSzines.setCellValueFactory(new PropertyValueFactory<>("oszlopSzines"));
+        tcSzinkron.setCellValueFactory(new PropertyValueFactory<>("oszlopSzinkron"));
+        tcSzarmazas.setCellValueFactory(new PropertyValueFactory<>("oszlopSzarmazas"));
+        tcMufaj.setCellValueFactory(new PropertyValueFactory<>("oszlopMufaj"));
+        tcHossz.setCellValueFactory(new PropertyValueFactory<>("oszlopHossz"));
     }
 
     public void btATorolMozi(ActionEvent event) {
+        MoziDAO alma=new MoziDAO();
+        alma.deleteMozi(Integer.parseInt(tfMoziAzon.getText()));
+       // System.out.println(Integer.parseInt(tfMoziAzon.getText()));
+        cbModositMozi.getItems().clear();
+        cbModositMozi.setPromptText("Mozi neve");
+        for (Mozi m : MoziDAO.getMozi()
+        ) {
+            cbModositMozi.getItems().add(m.getOszlopMoziNev());
+        }
     }
     public void btAMenuTorolMozi(ActionEvent event){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -142,6 +178,13 @@ public class HelloController {
         ) {
             cbModositMozi.getItems().add(m.getOszlopMoziNev());
         }
+        tfMoziAzon.setText("");
+        tfMoziNeve.setText("");
+        tfIrSzam.setText("");
+        tfCim.setText("");
+        tfTelefon.setText("");
+        cbModositMozi.getSelectionModel().clearSelection();
+
     }
     public void btAMenuIrMozi(ActionEvent event) {
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -155,8 +198,94 @@ public class HelloController {
             vbKeresMozi.getChildren().add(btIrMozi);
         }
         vbKeresMozi.getChildren().remove(cbModositMozi);
+        tfMoziAzon.setText("");
+        tfMoziNeve.setText("");
+        tfIrSzam.setText("");
+        tfCim.setText("");
+        tfTelefon.setText("");
+        cbModositMozi.getSelectionModel().clearSelection();
+
     }
     public void btAIrMozi(ActionEvent event) {
+        MoziDAO alma=new MoziDAO();
+            alma.IrMozi(new Mozi(tfMoziNeve.getText(), Integer.parseInt(tfIrSzam.getText()), tfCim.getText(), tfTelefon.getText()));
 
+
+    }
+
+    public void rbAMozikKeresoFelirat(ActionEvent event) {
+    }
+
+    public void rbAMozikKeresoSzinkron(ActionEvent event) {
+    }
+
+    public void tfAMozikKeresoFilmCim(ActionEvent event) {
+    }
+
+    public void cbAMozikKeresoMoziNev(ActionEvent event) {
+    }
+
+    public void btAMoziKeres(ActionEvent event) {
+
+    }
+
+    public void btAMozikKeresoKeres(ActionEvent event) {
+
+        String szinkron="fel";
+        if (rbMozikKeresoSzinkron.isSelected()){
+            szinkron="fel";
+        }else{
+            szinkron="mb";
+        }
+        int szines=0;
+        if (rbMozikKeresoSzinkron.isSelected()){
+            szines=0;
+        }else{
+            szines=1;
+        }
+      //  System.out.println(szinkron+" "+szines);
+      //  System.out.println("alma"+rbMozikKeresoSzinkron.isSelected());
+       /* System.out.println("alma"+rbMozikKeresoFeliratMb.isSelected());
+        System.out.println("alma"+rbMozikKeresoFelirat.isSelected());*/
+        String moziNev="";
+        if (cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem()!=null){
+            moziNev=cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem().toString();
+           // System.out.println("alma"+cbMozikKeresoMoziNev.getSelectionModel().getSelectedItem().toString());
+        }
+        String Filmcim="";
+        if (!tfMozikKeresoFilmCim.getText().isEmpty()){
+            Filmcim=tfMozikKeresoFilmCim.getText();
+           // System.out.println("alma"+tfMozikKeresoFilmCim.getText());
+        }
+        MoziFilmHelyDAO.keresMoziFilmHely(moziNev,Filmcim,szinkron,szines);
+        if (!vbKontener.getChildren().contains(moziFilmHelyTabla)) {
+            vbKontener.getChildren().add(moziFilmHelyTabla);
+        }
+        System.out.println(moziNev+" "+Filmcim+" "+szinkron+" "+szines);
+        moziFilmHelyTabla.setItems(MoziFilmHelyDAO.keresMoziFilmHely(moziNev,Filmcim,szinkron,szines));
+
+        tcMoziNev.setCellValueFactory(new PropertyValueFactory<>("oszlopMoziNev"));
+        tcIrSzam.setCellValueFactory(new PropertyValueFactory<>("oszlopIrSzam"));
+        tcCim.setCellValueFactory(new PropertyValueFactory<>("oszlopcim"));
+        tcTelefon.setCellValueFactory(new PropertyValueFactory<>("oszloptelefon"));
+        tcFilmCim.setCellValueFactory(new PropertyValueFactory<>("oszlopFilmCim"));
+        tcSzines.setCellValueFactory(new PropertyValueFactory<>("oszlopSzines"));
+        tcSzinkron.setCellValueFactory(new PropertyValueFactory<>("oszlopSzinkron"));
+        tcSzarmazas.setCellValueFactory(new PropertyValueFactory<>("oszlopSzarmazas"));
+        tcMufaj.setCellValueFactory(new PropertyValueFactory<>("oszlopMufaj"));
+        tcHossz.setCellValueFactory(new PropertyValueFactory<>("oszlopHossz"));
+    }
+
+    public void btAMenuMoziKeres(ActionEvent event) {
+        vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+        vbKontener.getChildren().add(btMoziKeresoresz);
+        for (Mozi m : MoziDAO.getMozi()
+        ) {
+            cbMozikKeresoMoziNev.getItems().add(m.getOszlopMoziNev());
+        }
+    }
+
+    public void rbAMozikKeresoFeliratMb(ActionEvent event) {
     }
 }

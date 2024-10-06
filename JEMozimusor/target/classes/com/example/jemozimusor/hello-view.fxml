@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -19,6 +21,17 @@
       <left>
          <VBox fx:id="vbMoziFilmHely" alignment="CENTER" prefHeight="1200.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <children>
+               <HBox fx:id="btMoziKeresoresz" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <ComboBox fx:id="cbMozikKeresoMoziNev" onAction="#cbAMozikKeresoMoziNev" prefWidth="150.0" />
+                     <Label text="Film cim: " />
+                     <TextField fx:id="tfMozikKeresoFilmCim" onAction="#tfAMozikKeresoFilmCim" />
+                     <RadioButton fx:id="rbMozikKeresoFelirat" mnemonicParsing="false" onAction="#rbAMozikKeresoFelirat" text="fel" />
+                     <RadioButton fx:id="rbMozikKeresoFeliratMb" mnemonicParsing="false" onAction="#rbAMozikKeresoFeliratMb" text="mb" />
+                     <CheckBox fx:id="rbMozikKeresoSzinkron" mnemonicParsing="false" onAction="#rbAMozikKeresoSzinkron" text="Szines" />
+                     <Button fx:id="btMozikKeresoKeres" mnemonicParsing="false" onAction="#btAMozikKeresoKeres" text="Keres" />
+                  </children>
+               </HBox>
                <TableView fx:id="moziFilmHelyTabla" prefHeight="600.0" prefWidth="600.0">
                  <columns>
                    <TableColumn fx:id="tcMoziNev" prefWidth="75.0" text="Mozinev" />
@@ -76,9 +89,10 @@
          <HBox fx:id="hbMenusor" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
                <Button fx:id="btMoziOlvas" mnemonicParsing="false" onAction="#btAMoziOlvas" text="Mozi olvas" />
-              <Button fx:id="btMoziKeres" onAction="#onHelloButtonClick" text="Mozi kereso" />
+              <Button fx:id="btMoziKeres" onAction="#onHelloButtonClick" text="Mozi Modosit" />
                <Button fx:id="btMenuTorolMozi" mnemonicParsing="false" onAction="#btAMenuTorolMozi" text="Mozi Torol" />
                <Button fx:id="btMenuIrMozi" mnemonicParsing="false" onAction="#btAMenuIrMozi" text="Mozi ir" />
+               <Button fx:id="btMenuMoziKeres" mnemonicParsing="false" onAction="#btAMenuMoziKeres" text="Kereso" />
             </children>
          </HBox>
       </top>

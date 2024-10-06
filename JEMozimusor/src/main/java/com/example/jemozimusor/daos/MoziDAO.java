@@ -48,6 +48,8 @@ public class MoziDAO {
                         rs.getString(oszlopcim),
                         rs.getString(oszloptelefon)));
             }
+            statement.close();
+            connection.close();
         }catch (SQLException e){
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
@@ -83,7 +85,7 @@ public class MoziDAO {
                        LocalDateTime.now() + ": Mozi adatait nem sikerult módosítottuk az adatbázisban..");
            }
 
-           //!!! IDE KELL EGY OPTIONAL<MOZI>....
+
 
            Optional<Mozi> optionalMozi=getMozi(ujMozi.getOszlopMoziAzon());
            optionalMozi.ifPresentOrElse((regiMozi)-> {
@@ -111,4 +113,57 @@ public class MoziDAO {
         }
         return Optional.empty();
     }
+    public void deleteMozi(int id) {
+        try {
+            Connection connection = Database.connect();
+            String query = "DELETE FROM " + tablaNevMozi + " WHERE " + oszlopMoziAzon + " = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            int db= statement.executeUpdate();
+            if (db<1) {
+                System.out.println("Nem sikerult torolni a mozit.");
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Mozi adatai nem kerultek torlesre az adatbazisbol");
+        }
+
+        Optional<Mozi> moziTorol=getMozi(id);
+        moziTorol.ifPresent(mozi::remove);
+    }
+
+    public void IrMozi(Mozi ujMozi){
+        try {
+            Connection connection=Database.connect();
+            String query="Insert into " + tablaNevMozi + " (mozinev,irszam,cim,telefon) Values(?,?,?,?)";
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,ujMozi.getOszlopMoziNev());
+            statement.setInt(2,ujMozi.getOszlopIrSzam());
+            statement.setString(3,ujMozi.getOszlopcim());
+            statement.setString(4,ujMozi.getOszloptelefon());
+
+
+            int rs = statement.executeUpdate();
+            if (rs < 0) {
+                Logger.getAnonymousLogger().log(
+                        Level.INFO,
+                        LocalDateTime.now() + ": Mozi adatait nem sikerult beilleszteni az adatbázisban..");
+            }
+            statement.close();
+            connection.close();
+
+        }catch (SQLException e){
+            Logger.getAnonymousLogger().log(
+                    Level.SEVERE,
+                    LocalDateTime.now() + ": Mozi adatai nem kerult beilleszteni az adatbazisban ");
+        }
+
+    }
+
+
 }
