@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Database {
-    private static final String location = HelloApplication.class.getResource("mozimusor.db").toExternalForm();
+    private static  String location = HelloApplication.class.getResource("mozimusor.db").toExternalForm();
 
 
     public static boolean isOK() {
@@ -27,7 +27,7 @@ public class Database {
             DriverManager.registerDriver(new org.sqlite.JDBC());
             return true;
         } catch (ClassNotFoundException | SQLException classNotFoundException) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not start SQLite Drivers");
+            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Nincs SQLite driver");
             return false;
         }
     }
@@ -36,7 +36,7 @@ public class Database {
         try (Connection connection = connect()) {
             return connection != null;
         } catch (SQLException e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not connect to database");
+            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Adatbazis kapcsolat ellenorzes sikertelen");
             return false;
         }
     }
@@ -46,7 +46,7 @@ public class Database {
         return true;
     }
 
-    protected static Connection connect() {
+    public static Connection connect() {
 
        /* dbpath="jdbc:sqlite:"+SQLiteExampleApp.class.getResource("database/database.db");
         dbpath="jdbc:sqlite::resource:com/edencoding/database/database.db";
@@ -60,12 +60,12 @@ public class Database {
         // String dbPrefix = "jdbc:sqlite::resource:com/example/javafx1/database/database.db";
         Connection connection;
         String dbPrefix = "jdbc:sqlite:";
-
+        location="C:/Users/Alma/Downloads/1_JavaBeadandoEloadas/mozimusor.db";
         try {
             connection = DriverManager.getConnection(dbPrefix+location);
         } catch (SQLException exception) {
             Logger.getAnonymousLogger().log(Level.SEVERE,
-                    LocalDateTime.now() + ": Could not connect to SQLite DB at " );
+                    LocalDateTime.now() + ": Nem sikerult kapcsolodni az adatbazishoz " );
             return null;
         }
         return connection;
