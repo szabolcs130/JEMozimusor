@@ -107,10 +107,28 @@
                            <MenuItem fx:id="btMenuMoziKeres" mnemonicParsing="false" onAction="#btAMenuMoziKeres" text="Mozi Keres" />
                      </items>
                    </Menu>
+                     <Menu mnemonicParsing="false" text="Parhuzamos">
+                        <items>
+                           <MenuItem fx:id="btMenuParhuzamos" mnemonicParsing="false" onAction="#btAMenuParhuzamos" text="Parhuzamos Szal" />
+                        </items>
+                     </Menu>
                  </menus>
                </MenuBar>
             </children>
          </HBox>
       </top>
+      <right>
+         <HBox fx:id="hbCrudMelletti" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+               <VBox fx:id="vbParhuzamos" prefHeight="200.0" prefWidth="100.0">
+                  <children>
+                     <Label fx:id="lb1" text="Label" />
+                     <Label fx:id="lb2" text="Label" />
+                     <Button fx:id="btParhuzamosIndit" mnemonicParsing="false" onAction="#btAParhuzamosIndit" text="Button" />
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+      </right>
    </BorderPane>
 </VBox>

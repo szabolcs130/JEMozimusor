@@ -6,6 +6,7 @@ import com.example.jemozimusor.daos.MoziDAO;
 import com.example.jemozimusor.models.MoziFilmHely;
 import com.example.jemozimusor.models.Mozi;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +57,10 @@ public class HelloController {
     public HBox btMoziKeresoresz;
     public RadioButton rbMozikKeresoFeliratMb;
     public Button btMozikKeresoKeres;
+    public HBox hbCrudMelletti;
+    public VBox vbParhuzamos;
+    public Label lb1;
+    public Label lb2;
 
     public void initialize(){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -318,4 +323,80 @@ public class HelloController {
 
     public void rbAMozikKeresoFeliratMb(ActionEvent event) {
     }
+
+    public void btAMenuParhuzamos(ActionEvent event) {
+        vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+        vbKontener.getChildren().add(vbParhuzamos);
+
+    }
+
+    public void btAParhuzamosIndit(ActionEvent event) {
+        MyThread work2so=new MyThread();
+        Thread a=new Thread(work2so);
+        a.start();
+
+        MyThread2 work2so2=new MyThread2();
+        Thread a2=new Thread(work2so2);
+
+        a2.start();
+    }
+
+
+    class MyThread implements Runnable{
+        @Override
+        public void run() {
+            while (true){
+                Platform.runLater(()->{
+                    lb1.setText("Korte");});
+                try {
+                    ;
+                    // System.out.println("Alma");
+                    Thread.sleep(2000);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(()->{
+                    lb1.setText("KORTE");});
+                try {
+                    ;
+                    // System.out.println("Alma");
+                    Thread.sleep(2000);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+    class MyThread2 implements Runnable{
+        @Override
+        public void run() {
+            while (true){
+                Platform.runLater(()->{
+                    lb2.setText("Alma");});
+                try {
+                    ;
+                    // System.out.println("Alma");
+                    Thread.sleep(1000);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(()->{
+                    lb2.setText("ALMA");});
+                try {
+                    ;
+                    // System.out.println("Alma");
+                    Thread.sleep(1000);
+
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+
 }
