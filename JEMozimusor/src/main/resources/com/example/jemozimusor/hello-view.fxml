@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ToggleGroup?>
 <VBox fx:id="vbKontener" alignment="CENTER" minHeight="1000.0" minWidth="1000.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jemozimusor.controllers.HelloController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -29,8 +30,9 @@
                      <ComboBox fx:id="cbMozikKeresoMoziNev" onAction="#cbAMozikKeresoMoziNev" prefWidth="150.0" />
                      <Label text="Film cim: " />
                      <TextField fx:id="tfMozikKeresoFilmCim" onAction="#tfAMozikKeresoFilmCim" />
-                     <RadioButton fx:id="rbMozikKeresoFelirat" mnemonicParsing="false" onAction="#rbAMozikKeresoFelirat" text="fel" />
-                     <RadioButton fx:id="rbMozikKeresoFeliratMb" mnemonicParsing="false" onAction="#rbAMozikKeresoFeliratMb" text="mb" />
+                      <fx:define><ToggleGroup fx:id="group" /></fx:define>
+                     <RadioButton toggleGroup="$group" fx:id="rbMozikKeresoFelirat" mnemonicParsing="false" onAction="#rbAMozikKeresoFelirat" text="fel" />
+                     <RadioButton toggleGroup="$group" fx:id="rbMozikKeresoFeliratMb" mnemonicParsing="false" onAction="#rbAMozikKeresoFeliratMb" text="mb" />
                      <CheckBox fx:id="rbMozikKeresoSzinkron" mnemonicParsing="false" onAction="#rbAMozikKeresoSzinkron" text="Szines" />
                      <Button fx:id="btMozikKeresoKeres" mnemonicParsing="false" onAction="#btAMozikKeresoKeres" text="Keres" />
                   </children>

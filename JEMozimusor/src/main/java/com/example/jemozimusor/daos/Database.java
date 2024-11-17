@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Database {
-    private static  String location = HelloApplication.class.getResource("mozimusor.db").toExternalForm();
+    private static  String location="";//= HelloApplication.class.getResource("mozimusor.db").toExternalForm();
 
 
     public static boolean isOK() {

@@ -95,10 +95,14 @@ public class HelloController {
         }
         vbKeresMozi.getChildren().remove(btIrMozi);
 
-        for (Mozi m:MoziDAO.getMozi()
-             ) {
-            cbModositMozi.getItems().add(m.getOszlopMoziNev());
+        if (cbModositMozi.getItems().size()>0) {
+            cbModositMozi.getItems().clear();
         }
+            for (Mozi m : MoziDAO.getMozi()
+            ) {
+                cbModositMozi.getItems().add(m.getOszlopMoziNev());
+            }
+
         tfMoziAzon.setText("");
         tfMoziNeve.setText("");
         tfIrSzam.setText("");
@@ -131,10 +135,14 @@ public class HelloController {
 
             cbModositMozi.getItems().clear();
             cbModositMozi.setPromptText("Mozi neve");
-            for (Mozi m : MoziDAO.getMozi()
-            ) {
-                cbModositMozi.getItems().add(m.getOszlopMoziNev());
+            if (cbModositMozi.getItems().size()>0) {
+                cbModositMozi.getItems().clear();
             }
+                for (Mozi m : MoziDAO.getMozi()
+                ) {
+                    cbModositMozi.getItems().add(m.getOszlopMoziNev());
+                }
+
         }
 
     }
@@ -163,10 +171,13 @@ public class HelloController {
        // System.out.println(Integer.parseInt(tfMoziAzon.getText()));
         cbModositMozi.getItems().clear();
         cbModositMozi.setPromptText("Mozi neve");
-        for (Mozi m : MoziDAO.getMozi()
-        ) {
-            cbModositMozi.getItems().add(m.getOszlopMoziNev());
+        if (cbModositMozi.getItems().size()>0) {
+            cbModositMozi.getItems().clear();
         }
+            for (Mozi m : MoziDAO.getMozi()
+            ) {
+                cbModositMozi.getItems().add(m.getOszlopMoziNev());
+            }
     }
     public void btAMenuTorolMozi(ActionEvent event){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -180,10 +191,14 @@ public class HelloController {
         if (!vbKeresMozi.getChildren().contains(btTorolMozi)) {
             vbKeresMozi.getChildren().add(btTorolMozi);
         }
-        for (Mozi m:MoziDAO.getMozi()
-        ) {
-            cbModositMozi.getItems().add(m.getOszlopMoziNev());
+       if (cbModositMozi.getItems().size()>0){
+            cbModositMozi.getItems().clear();
         }
+
+            for (Mozi m : MoziDAO.getMozi()
+            ) {
+                cbModositMozi.getItems().add(m.getOszlopMoziNev());
+            }
         tfMoziAzon.setText("");
         tfMoziNeve.setText("");
         tfIrSzam.setText("");
@@ -215,7 +230,6 @@ public class HelloController {
     public void btAIrMozi(ActionEvent event) {
         MoziDAO alma=new MoziDAO();
             alma.IrMozi(new Mozi(tfMoziNeve.getText(), Integer.parseInt(tfIrSzam.getText()), tfCim.getText(), tfTelefon.getText()));
-
 
     }
 

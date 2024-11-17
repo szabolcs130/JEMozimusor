@@ -6,10 +6,7 @@ import com.example.jemozimusor.models.MoziFilmHely;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -156,6 +153,14 @@ public class MoziDAO extends MoziFilmHelyDAO{
                         Level.INFO,
                         LocalDateTime.now() + ": Mozi adatait nem sikerult beilleszteni az adatbázisban..");
             }
+            if (rs>0){
+                ResultSet rs2 = connection.createStatement().executeQuery("SELECT last_insert_rowid()");
+                if (rs2.next()) {
+                    int ujid = rs2.getInt(1); // Az új rekord ID-ja
+                    mozi.add(new Mozi(ujid, ujMozi.getOszlopMoziNev(), ujMozi.getOszlopIrSzam(), ujMozi.getOszlopcim(), ujMozi.getOszloptelefon()));
+                }
+            }
+
             MoziFilmHelyDAO.feltoltMoziFilmHely();
 
             statement.close();
@@ -165,6 +170,7 @@ public class MoziDAO extends MoziFilmHelyDAO{
             Logger.getAnonymousLogger().log(
                     Level.SEVERE,
                     LocalDateTime.now() + ": Mozi adatai nem kerult beilleszteni az adatbazisban ");
+           // e.printStackTrace();
         }
 
     }
