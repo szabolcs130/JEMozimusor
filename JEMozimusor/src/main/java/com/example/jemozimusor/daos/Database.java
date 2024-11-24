@@ -60,7 +60,7 @@ public class Database {
         // String dbPrefix = "jdbc:sqlite::resource:com/example/javafx1/database/database.db";
         Connection connection;
         String dbPrefix = "jdbc:sqlite:";
-        location="C:/Users/Alma/Downloads/1_JavaBeadandoEloadas/mozimusor.db";
+        location="C:/mozimusor.db";
         try {
             connection = DriverManager.getConnection(dbPrefix+location);
         } catch (SQLException exception) {
