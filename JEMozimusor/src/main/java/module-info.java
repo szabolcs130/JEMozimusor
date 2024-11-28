@@ -6,8 +6,11 @@ module com.example.jemozimusor {
     requires httpclient;
     requires gson;
     requires httpcore;
-
-
+    /*
+    requires com.google.gson;
+    requires com.oanda.v20;
+    */
+    opens com.oanda.v20.instrument to com.google.gson;
     opens com.example.jemozimusor to javafx.fxml;
     exports com.example.jemozimusor;
     exports com.example.jemozimusor.models;
