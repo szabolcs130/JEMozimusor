@@ -3,7 +3,9 @@ module com.example.jemozimusor {
     requires javafx.fxml;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
-
+    requires httpclient;
+    requires gson;
+    requires httpcore;
 
 
     opens com.example.jemozimusor to javafx.fxml;

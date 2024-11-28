@@ -382,6 +382,11 @@ public class HelloController {
         }catch (Exception e){ e.printStackTrace(); }
     }
 
+    public void btForexButtonClick(ActionEvent actionEvent) {
+        vbKontener.getChildren().removeAll(vbKontener.getChildren());
+        vbKontener.getChildren().add(hbMenusor);
+    }
+
 
     class MyThread implements Runnable{
         @Override
