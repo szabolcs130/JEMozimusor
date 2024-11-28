@@ -124,7 +124,7 @@
                      </Menu>
                      <Menu mnemonicParsing="false" text="FOREX">
                        <items>
-                         <MenuItem mnemonicParsing="false" text="Adatok lehívása" />
+                         <MenuItem mnemonicParsing="false" text="Adatok lehívása" onAction="#btForexButtonClick"/>
                        </items>
                      </Menu>
                  </menus>
