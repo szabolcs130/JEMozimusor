@@ -19,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 
 public class HelloController {
 
@@ -354,6 +354,32 @@ public class HelloController {
         Thread a2=new Thread(work2so2);
 
         a2.start();
+    }
+
+    public void btSoapButtonClick(ActionEvent actionEvent) {
+        try{
+            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "start cmd");
+            Process process = builder.start();
+
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(process.getOutputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            writer.println("Egy adatot várunk:");
+            writer.flush();
+
+            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+            String input = userInput.readLine();
+
+            System.out.println("Felhasználói input: " + input);
+            System.out.println("Soap kliens hívása...");
+
+            /*
+            MNBAforgalomServiceSoapImpl soapClient = new MNBAforgalomServiceSoapImpl();
+            String response = soapClient.getCurrentExchangeRates(input, null);
+            System.out.println("SOAP válasz: " + response);
+            */
+
+        }catch (Exception e){ e.printStackTrace(); }
     }
 
 

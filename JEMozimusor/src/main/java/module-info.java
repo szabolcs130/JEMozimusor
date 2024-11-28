@@ -5,6 +5,7 @@ module com.example.jemozimusor {
     requires org.xerial.sqlitejdbc;
 
 
+
     opens com.example.jemozimusor to javafx.fxml;
     exports com.example.jemozimusor;
     exports com.example.jemozimusor.models;
