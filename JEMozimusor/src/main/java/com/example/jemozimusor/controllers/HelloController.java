@@ -357,29 +357,12 @@ public class HelloController {
     }
 
     public void btSoapButtonClick(ActionEvent actionEvent) {
-        try{
-            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "start cmd");
-            Process process = builder.start();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Szolgáltatás nem elérhető");
+        alert.setHeaderText(null);  // Nincs fejléc
+        alert.setContentText("Ez a szolgáltatás jelenleg nem elérhető.");
 
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(process.getOutputStream()));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            writer.println("Egy adatot várunk:");
-            writer.flush();
-
-            BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
-            String input = userInput.readLine();
-
-            System.out.println("Felhasználói input: " + input);
-            System.out.println("Soap kliens hívása...");
-
-            /*
-            MNBAforgalomServiceSoapImpl soapClient = new MNBAforgalomServiceSoapImpl();
-            String response = soapClient.getCurrentExchangeRates(input, null);
-            System.out.println("SOAP válasz: " + response);
-            */
-
-        }catch (Exception e){ e.printStackTrace(); }
+        alert.showAndWait();
     }
 
     @FXML
