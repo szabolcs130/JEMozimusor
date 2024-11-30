@@ -382,10 +382,20 @@ public class HelloController {
         }catch (Exception e){ e.printStackTrace(); }
     }
 
-    public void btForexButtonClick(ActionEvent actionEvent) {
-        vbKontener.getChildren().removeAll(vbKontener.getChildren());
-        vbKontener.getChildren().add(hbMenusor);
+    @FXML
+    private void btForexButtonClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/jemozimusor/forex-window.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Forex Trades");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     class MyThread implements Runnable{

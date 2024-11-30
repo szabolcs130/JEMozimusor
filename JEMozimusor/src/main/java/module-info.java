@@ -7,7 +7,7 @@ module com.example.jemozimusor {
     requires gson;
     requires httpcore;
     //requires v20;
-   /* requires google.gson;
+    /*requires google.gson;
     requires com.oanda.v20;*/
 
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jemozimusor.controllers.ForexController">
+    <children>
+        <ListView fx:id="listViewTrades" prefHeight="200.0" prefWidth="300.0" />
+        <Button fx:id="btnPrintTrades" text="Print open trades" onAction="#handleLoadOpenTrades" />
+        <ComboBox fx:id="comboBoxPairs" prefWidth="200.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="EUR_USD" />
+                    <String fx:value="USD_JPY" />
+                    <String fx:value="GBP_USD" />
+                    <String fx:value="EUR_GBP" />
+                    <String fx:value="AUD_USD" />
+                    <String fx:value="NZD_USD" />
+                    <String fx:value="USD_CHF" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <TextField fx:id="textFieldAmount" promptText="Enter amount" />
+        <Button fx:id="btnOpenPosition" text="Open position"  />
+    </children>
+</VBox>
