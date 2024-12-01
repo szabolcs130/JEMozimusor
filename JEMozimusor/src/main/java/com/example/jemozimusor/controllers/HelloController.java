@@ -20,6 +20,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class HelloController {
 
@@ -61,6 +65,12 @@ public class HelloController {
     public VBox vbParhuzamos;
     public Label lb1;
     public Label lb2;
+
+    private final String[] data = {
+            "<MNBExchangeRatesQueryValues><FirstDate>1949-01-03</FirstDate><LastDate>2024-11-29</LastDate><Currencies><Curr>HUF</Curr><Curr>EUR</Curr><Curr>AUD</Curr><Curr>BGN</Curr><Curr>BRL</Curr><Curr>CAD</Curr><Curr>CHF</Curr><Curr>CNY</Curr><Curr>CZK</Curr><Curr>DKK</Curr><Curr>GBP</Curr><Curr>HKD</Curr><Curr>HRK</Curr><Curr>IDR</Curr><Curr>ILS</Curr><Curr>INR</Curr><Curr>ISK</Curr><Curr>JPY</Curr><Curr>KRW</Curr><Curr>MXN</Curr><Curr>MYR</Curr><Curr>NOK</Curr><Curr>NZD</Curr><Curr>PHP</Curr><Curr>PLN</Curr><Curr>RON</Curr><Curr>RSD</Curr><Curr>RUB</Curr><Curr>SEK</Curr><Curr>SGD</Curr><Curr>THB</Curr><Curr>TRY</Curr><Curr>UAH</Curr><Curr>USD</Curr><Curr>ZAR</Curr><Curr>ATS</Curr><Curr>AUP</Curr><Curr>BEF</Curr><Curr>BGL</Curr><Curr>CSD</Curr><Curr>CSK</Curr><Curr>DDM</Curr><Curr>DEM</Curr><Curr>EEK</Curr><Curr>EGP</Curr><Curr>ESP</Curr><Curr>FIM</Curr><Curr>FRF</Curr><Curr>GHP</Curr><Curr>GRD</Curr><Curr>IEP</Curr><Curr>ITL</Curr><Curr>KPW</Curr><Curr>KWD</Curr><Curr>LBP</Curr><Curr>LTL</Curr><Curr>LUF</Curr><Curr>LVL</Curr><Curr>MNT</Curr><Curr>NLG</Curr><Curr>OAL</Curr><Curr>OBL</Curr><Curr>OFR</Curr><Curr>ORB</Curr><Curr>PKR</Curr><Curr>PTE</Curr><Curr>ROL</Curr><Curr>SDP</Curr><Curr>SIT</Curr><Curr>SKK</Curr><Curr>SUR</Curr><Curr>VND</Curr><Curr>XEU</Curr><Curr>XTR</Curr><Curr>YUD</Curr></Currencies></MNBExchangeRatesQueryValues>",
+            "<MNBCurrentExchangeRates><Day date=\"2024-11-29\"><Rate unit=\"1\" curr=\"AUD\">254,66000</Rate><Rate unit=\"1\" curr=\"BGN\">211,22000</Rate><Rate unit=\"1\" curr=\"BRL\">65,05000</Rate><Rate unit=\"1\" curr=\"CAD\">279,50000</Rate><Rate unit=\"1\" curr=\"CHF\">444,05000</Rate><Rate unit=\"1\" curr=\"CNY\">54,05000</Rate><Rate unit=\"1\" curr=\"CZK\">16,36000</Rate><Rate unit=\"1\" curr=\"DKK\">55,39000</Rate><Rate unit=\"1\" curr=\"EUR\">413,13000</Rate><Rate unit=\"1\" curr=\"GBP\">496,68000</Rate><Rate unit=\"1\" curr=\"HKD\">50,27000</Rate><Rate unit=\"100\" curr=\"IDR\">2,47000</Rate><Rate unit=\"1\" curr=\"ILS\">107,44000</Rate><Rate unit=\"1\" curr=\"INR\">4,63000</Rate><Rate unit=\"1\" curr=\"ISK\">2,84000</Rate><Rate unit=\"100\" curr=\"JPY\">260,57000</Rate><Rate unit=\"100\" curr=\"KRW\">28,03000</Rate><Rate unit=\"1\" curr=\"MXN\">19,16000</Rate><Rate unit=\"1\" curr=\"MYR\">88,03000</Rate><Rate unit=\"1\" curr=\"NOK\">35,31000</Rate><Rate unit=\"1\" curr=\"NZD\">231,41000</Rate><Rate unit=\"1\" curr=\"PHP\">6,67000</Rate><Rate unit=\"1\" curr=\"PLN\">95,96000</Rate><Rate unit=\"1\" curr=\"RON\">83,00000</Rate><Rate unit=\"1\" curr=\"RSD\">3,53000</Rate><Rate unit=\"1\" curr=\"RUB\">3,62000</Rate><Rate unit=\"1\" curr=\"SEK\">35,88000</Rate><Rate unit=\"1\" curr=\"SGD\">291,97000</Rate><Rate unit=\"1\" curr=\"THB\">11,40000</Rate><Rate unit=\"1\" curr=\"TRY\">11,28000</Rate><Rate unit=\"1\" curr=\"UAH\">9,41000</Rate><Rate unit=\"1\" curr=\"USD\">391,30000</Rate><Rate unit=\"1\" curr=\"ZAR\">21,65000</Rate></Day></MNBCurrentExchangeRates>",
+            "<MNBExchangeRates><Day date=\"2022-09-14\"><Rate unit=\"1\" curr=\"EUR\">402,09</Rate></Day><Day date=\"2022-09-13\"><Rate unit=\"1\" curr=\"EUR\">396,42</Rate></Day><Day date=\"2022-09-12\"><Rate unit=\"1\" curr=\"EUR\">395,06</Rate></Day><Day date=\"2022-09-09\"><Rate unit=\"1\" curr=\"EUR\">395,48</Rate></Day><Day date=\"2022-09-08\"><Rate unit=\"1\" curr=\"EUR\">397,57</Rate></Day><Day date=\"2022-09-07\"><Rate unit=\"1\" curr=\"EUR\">401,49</Rate></Day><Day date=\"2022-09-06\"><Rate unit=\"1\" curr=\"EUR\">403,34</Rate></Day><Day date=\"2022-09-05\"><Rate unit=\"1\" curr=\"EUR\">403,83</Rate></Day><Day date=\"2022-09-02\"><Rate unit=\"1\" curr=\"EUR\">398,96</Rate></Day><Day date=\"2022-09-01\"><Rate unit=\"1\" curr=\"EUR\">401,28</Rate></Day><Day date=\"2022-08-31\"><Rate unit=\"1\" curr=\"EUR\">405,11</Rate></Day><Day date=\"2022-08-30\"><Rate unit=\"1\" curr=\"EUR\">407,29</Rate></Day><Day date=\"2022-08-29\"><Rate unit=\"1\" curr=\"EUR\">410,80</Rate></Day><Day date=\"2022-08-26\"><Rate unit=\"1\" curr=\"EUR\">409,00</Rate></Day><Day date=\"2022-08-25\"><Rate unit=\"1\" curr=\"EUR\">408,35</Rate></Day><Day date=\"2022-08-24\"><Rate unit=\"1\" curr=\"EUR\">411,24</Rate></Day><Day date=\"2022-08-23\"><Rate unit=\"1\" curr=\"EUR\">410,88</Rate></Day><Day date=\"2022-08-22\"><Rate unit=\"1\" curr=\"EUR\">405,83</Rate></Day><Day date=\"2022-08-19\"><Rate unit=\"1\" curr=\"EUR\">406,85</Rate></Day><Day date=\"2022-08-18\"><Rate unit=\"1\" curr=\"EUR\">405,05</Rate></Day><Day date=\"2022-08-17\"><Rate unit=\"1\" curr=\"EUR\">406,92</Rate></Day><Day date=\"2022-08-16\"><Rate unit=\"1\" curr=\"EUR\">404,01</Rate></Day><Day date=\"2022-08-15\"><Rate unit=\"1\" curr=\"EUR\">397,33</Rate></Day></MNBExchangeRates>"
+    };
 
     public void initialize(){
         vbKontener.getChildren().removeAll(vbKontener.getChildren());
@@ -379,6 +389,33 @@ public class HelloController {
         }
     }
 
+    @FXML
+    public void btSoapLetoltesAction(ActionEvent event) {
+        try {
+            Path path = Paths.get("MNB.txt");
+            String combined = String.join("\n", data);
+            Files.write(path, combined.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Fájl sikeresen letöltve: " + path.toAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void btSoapLetoltes2Action(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/jemozimusor/soap-form.fxml"));
+            Parent root = fxmlLoader.load();
+            //Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("SOAP Űrlap");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("Valami hiba történt a SOAP form megnyitása során");
+        }
+    }
 
 
     class MyThread implements Runnable{
