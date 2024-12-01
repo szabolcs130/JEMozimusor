@@ -6,6 +6,7 @@ module com.example.jemozimusor {
     requires httpclient;
     requires gson;
     requires httpcore;
+    requires java.desktop;
     //requires v20;
     /*requires google.gson;
     requires com.oanda.v20;*/

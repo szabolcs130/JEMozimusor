@@ -56,10 +56,10 @@ public class ForexController {
 
     @FXML
     private void handleLoadOpenTrades() {
-        // A ListView kitöltése az előre meghatározott adatainkkal
-        listViewTrades.getItems().clear();  // Először töröljük a ListView tartalmát
+
+        listViewTrades.getItems().clear();
         for (String trade : tradeData) {
-            listViewTrades.getItems().add(trade);  // Hozzáadjuk az új tranzakciókat
+            listViewTrades.getItems().add(trade);  
         }
     }
 }
